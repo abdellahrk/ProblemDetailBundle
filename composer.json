@@ -1,0 +1,21 @@
+{
+    "name": "rami/problem-detail-bundle",
+    "description": "A Symfony bundle that implements application/problem+json to give meaning to api response errors",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rami\\ProblemDetailBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Abdellah Ramadan",
+            "email": "ramadanabdel24@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/http-kernel": "^7.3",
+        "symfony/http-foundation": "^7.3"
+    }
+}
