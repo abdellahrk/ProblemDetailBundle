@@ -48,7 +48,7 @@ class ProblemResponse extends Response
     {
         parent::__construct(status: $this->status);
 
-        $this->$title = $this->title && $this->type === null ? Response::$statusTexts[$this->status] : $this->title;
+        $this->title = $this->title && $this->type === null ? Response::$statusTexts[$this->status] : $this->title;
 
         $this->setProblemContent();
     }
