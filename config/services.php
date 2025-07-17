@@ -1,7 +1,9 @@
 <?php
 
+use Rami\ProblemDetailBundle\Exceptions\ProblemDetailResponseException;
+use Rami\ProblemDetailBundle\ProblemResponse\ProblemResponse;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Rami\ProblemDetailBundle\ProblemResponse;
+
 return static function(ContainerConfigurator $configurator): void
 {
     $services = $configurator->services()
@@ -10,4 +12,5 @@ return static function(ContainerConfigurator $configurator): void
         ->autoconfigure();
 
     $services->set('problem.response', ProblemResponse::class)->tag('problem_response_tag');
+    $services->set('problem.response.exception', ProblemDetailResponseException::class)->tag('problem_response_exception');
 };
