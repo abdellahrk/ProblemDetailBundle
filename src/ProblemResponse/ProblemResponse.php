@@ -79,7 +79,7 @@ class ProblemResponse extends Response
 
         $problem = [
             'type' => $this->type ?? 'about:blank',
-            'title' =>  $this->title ?? 'Unknown error',
+            'title' =>  $this->title ?? Response::$statusTexts[$this->status],
             'detail' => $this->detail ?? null,
             'status' => $this->status,
             'instance' => $this->instance ?? null,
