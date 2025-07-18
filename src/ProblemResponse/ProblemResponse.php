@@ -29,7 +29,7 @@ class ProblemResponse extends Response
      *
      * @param string|null $instance a URI that identifies the specific occurrence of the problem. If not set, the default value is null.
      *
-     * @param array $extensions a JSON array containing references to the source of the error, optionally including any of the following members:
+     * @param array[] $extensions a JSON array containing references to the source of the error, optionally including any of the following members:
      *
      * - file: The filename of the source file that produced the error.
      * - line: The line number in the source file at which the error occurred.
@@ -55,26 +55,29 @@ class ProblemResponse extends Response
 
     public function setHeaders(): void
     {
-        if ($this->headers->has('Content-Type') && $this->headers->get('Content-Type') !== 'application/json') {
-            $this->headers->set('Content-Type', 'application/problem+json');
+        $this->headers->set('Content-Type', 'application/problem+json');
+        $this->headers->set('Content-Language', $this->headers->get('Content-Language'));
+    }
+
+    /**
+     * @throws ProblemDetailResponseException
+     */
+    public function checkErrorStatus(): void
+    {
+        if (!($this->status >= 400) || !($this->status < 600)) {
+            throw new ProblemDetailResponseException("Not a valid HTTP error: $this->status");
         }
     }
 
     public function setProblemContent(): string
     {
+        $this->checkErrorStatus();
+
         if (null !== $this->type) {
             $scheme = parse_url($this->type, PHP_URL_SCHEME);
-            if ($scheme != 'http' && $scheme != 'https') {
+            if (null === $scheme) {
                 throw new ProblemDetailResponseException("Invalid url type: $this->type");
             }
-        }
-
-        $extensions = null;
-
-        if (is_array($this->extensions) ) {
-            $extensions = array_map(function ($item) {
-                return $item;
-            }, $this->extensions);
         }
 
         $problem = [
@@ -83,7 +86,7 @@ class ProblemResponse extends Response
             'detail' => $this->detail ?? null,
             'status' => $this->status,
             'instance' => $this->instance ?? null,
-            ...$extensions ?? null
+            ...$this->extensions
         ];
 
         $problem = array_filter($problem, function ($value) {
