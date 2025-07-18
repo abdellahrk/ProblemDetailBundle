@@ -1,9 +1,10 @@
-[RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807#section-3.2): Problem Details for HTTP API
+[RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457): Problem Details for HTTP API 
 -
+#### [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807#section-3.2): Problem Details for HTTP API deprecated by RFC 9457
 
-Throwaway implementation of the RFC 7807 to give meaning to HTTP Response Errors
+Implementation of the RFC 9457 to give meaning to HTTP Response Errors
 
-This is implemented using the Symfony bundle system.
+A simple bundle
 
 ### Composer installation:
 
