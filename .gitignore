@@ -1,0 +1,34 @@
+# Symfony / PHP
+/vendor/
+/var/
+/.env
+.env.local
+.env.*.local
+.phpunit.result.cache
+/build/
+/node_modules/
+
+# IDEs and editors
+/.idea/
+/.vscode/
+/*.swp
+*.sublime-workspace
+*.sublime-project
+
+# Logs and cache
+*.log
+*.cache
+
+# Composer
+composer.lock
+
+# PHPUnit
+/phpunit.xml
+/phpunit.xml.dist
+
+# Coverage
+/coverage/
+
+# Misc
+.DS_Store
+Thumbs.db
